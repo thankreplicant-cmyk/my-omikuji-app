@@ -1,6 +1,10 @@
 import streamlit as st
 import random
-
+st.set_page_config(
+    page_title="人生！運試しおみくじ",
+    page_icon="🧧",
+    layout="centered"
+)
 st.title("🔥 人生！運試しおみくじ 🔥")
 
 # --- 【プロの小技】ボタンを金色にする魔法（CSS） ---
@@ -69,3 +73,4 @@ else:
         full_share_url = f"{base_url}/?num={num}"
         
         st.code(full_share_url)
+
