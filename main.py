@@ -1,28 +1,45 @@
 import streamlit as st
 import random
 
-# --- ページ設定（Discordなどの埋め込み用） ---
+# --- ページ設定 ---
 st.set_page_config(
     page_title="人生！運試しおみくじ",
     page_icon="🧧",
     layout="centered"
 )
 
-# --- ボタンを金色にする魔法（CSSカスタム） ---
+# --- 背景とボタンのデザイン（CSS） ---
 st.markdown("""
     <style>
+    /* 画面全体の背景色をおみくじ箱のような茶色（和色：栗色っぽく） */
+    .stApp {
+        background-color: #762f07; /* 渋い茶色 */
+    }
+    
+    /* タイトルなどの文字を読みやすく白にする */
+    h1, h2, h3, p, span {
+        color: #ffffff !important;
+    }
+
+    /* ボタンのデザイン */
     div.stButton > button {
-        background-color: #FFD700; /* 金色 */
-        color: #000000;           /* 文字は黒 */
-        border-radius: 10px;      /* 角を丸く */
-        border: 2px solid #DAA520; /* 縁取り */
-        font-weight: bold;        /* 太字 */
+        background-color: #FFD700; 
+        color: #000000;
+        border-radius: 10px;
+        border: 2px solid #DAA520;
+        font-weight: bold;
         height: 3em;
-        width: 100%;              /* 横幅いっぱい */
+        width: 100%;
     }
     div.stButton > button:hover {
-        background-color: #FFA500; /* ホバー時にオレンジ */
+        background-color: #FFA500;
         color: #FFFFFF;
+    }
+
+    /* 共有用コードブロックの背景を見やすく */
+    code {
+        color: #fffdde !important;
+        background-color: #4a1d05 !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -44,48 +61,36 @@ useless_advices = [
 # --- 煽り文句リスト ---
 insults = ["凶　それでいいの？w", "凶　人生、そんなに甘くないよw", "凶　出直し確定ですw"]
 
-# --- URLからデータを読み取る (共有機能) ---
+# --- URL共有機能 ---
 query_params = st.query_params
 shared_num = query_params.get("num")
 
-# --- 結果表示用関数 ---
 def display_result(num):
-    # 数字に基づいて一意の助言を選ぶ
     advice = useless_advices[num % len(useless_advices)]
     
     if num >= 70:
-        # 【煽り】70以上
         st.error(f"出た数字: {num}")
         st.markdown(f"# {insults[num % len(insults)]}")
-        # 煽りの時だけ助言を表示
         st.info(f"💡 助言：\n{advice}")
-        
     elif num == 1:
-        # 【超大吉】1
         st.balloons()
         st.success(f"出た数字: {num}")
         st.markdown("# 🌈 大吉　最高の人生 🌈")
-        
     elif 2 <= num <= 20:
-        # 【好調】2〜20
         st.info(f"出た数字: {num}")
         st.markdown("## 📈 中吉　絶好調 📈")
-        
     else:
-        # 【平凡】それ以外
         st.warning(f"出た数字: {num}")
         st.markdown("## 😑 吉　平凡な人生ﾍｲﾍｲ 😑")
 
 # --- メインロジック ---
 if shared_num:
-    # 友達から共有されたURLを開いた場合
     st.write("--- 友達からの共有結果 ---")
     display_result(int(shared_num))
     if st.button("自分も占う"):
         st.query_params.clear()
         st.rerun()
 else:
-    # 自分で占う場合
     if st.button("🧧 おみくじを引く"):
         num = random.randint(1, 100)
         display_result(num)
@@ -93,6 +98,6 @@ else:
         st.write("---")
         st.write("🔗 この【結果URL】をDiscordに貼って友達を煽ろう！")
         
-        # 自分のアプリのURLをベースにする
-        base_url = "https://my-omikuji-app-rrjeeuxyemsppmr3oveugp.streamlit.app"
-
+        base_url = "https://my-omikuji-app-rrjeeuxyemsppmr3oveugp.streamlit.app" 
+        full_share_url = f"{base_url}/?num={num}"
+        st.code(full_share_url)
