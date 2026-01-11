@@ -42,7 +42,7 @@ useless_advices = [
 ]
 
 # --- 煽り文句リスト ---
-insults = ["それでいいの？w", "人生、そんなに甘くないよw", "出直し確定ですw"]
+insults = ["【凶】　それでいいの？w", "【凶】　人生、そんなに甘くないよw", "【凶】出直し確定ですw"]
 
 # --- URLからデータを読み取る (共有機能) ---
 query_params = st.query_params
@@ -64,17 +64,17 @@ def display_result(num):
         # 【超大吉】1
         st.balloons()
         st.success(f"出た数字: {num}")
-        st.markdown("# 🌈 最高の人生 🌈")
+        st.markdown("# 🌈 【大吉】　最高の人生 🌈")
         
     elif 2 <= num <= 20:
         # 【好調】2〜20
         st.info(f"出た数字: {num}")
-        st.markdown("## 📈 絶好調 📈")
+        st.markdown("## 📈 【中吉】　絶好調 📈")
         
     else:
         # 【平凡】それ以外
         st.warning(f"出た数字: {num}")
-        st.markdown("## 😑 平凡な人生ﾍｲﾍｲ 😑")
+        st.markdown("## 😑 【吉】　平凡な人生ﾍｲﾍｲ 😑")
 
 # --- メインロジック ---
 if shared_num:
@@ -98,3 +98,4 @@ else:
         full_share_url = f"{base_url}/?num={num}"
         
         st.code(full_share_url)
+
