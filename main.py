@@ -10,11 +10,7 @@ st.set_page_config(
 
 # --- 背景とボタンのデザイン（CSS） ---
 st.markdown("""
-    <style>
-    /* 画面全体の背景色をおみくじ箱のような茶色（和色：栗色っぽく） */
-    .stApp {
-        background-color: #762f07; /* 渋い茶色 */
-    }
+ 
     
     /* タイトルなどの文字を読みやすく白にする */
     h1, h2, h3, p, span {
@@ -101,3 +97,4 @@ else:
         base_url = "https://my-omikuji-app-rrjeeuxyemsppmr3oveugp.streamlit.app" 
         full_share_url = f"{base_url}/?num={num}"
         st.code(full_share_url)
+
