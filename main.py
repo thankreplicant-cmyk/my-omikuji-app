@@ -1,7 +1,6 @@
 import streamlit as st
 import random
 
-# --- 設定 ---
 st.title("🔥 人生！運試しおみくじ 🔥")
 
 useless_advices = [
@@ -11,13 +10,12 @@ useless_advices = [
 ]
 insults = ["その決断でいいの？w", "人生、そんなに甘くないよw", "出直し確定ですw"]
 
-# --- URLからデータを読み取る (クエリパラメータ) ---
+# URLからデータを読み取る
 query_params = st.query_params
-shared_num = query_params.get("num") # URLに ?num=XX があれば取得
+shared_num = query_params.get("num")
 
-# --- 表示用関数 (共通化) ---
 def display_result(num):
-    advice = useless_advices[num % len(useless_advices)] # 数字から固定のアドバイスを導く
+    advice = useless_advices[num % len(useless_advices)]
     if num >= 70:
         st.error(f"出た数字: {num}")
         st.markdown(f"# {insults[num % len(insults)]}")
@@ -33,25 +31,24 @@ def display_result(num):
         st.markdown("## 😑 平凡な人生 😑")
     
     st.info(f"💡 助言：\n{advice}")
-    return advice
 
-# --- メイン処理 ---
 if shared_num:
-    # 共有URLから来た場合
     st.write("--- 友達からの共有結果 ---")
     display_result(int(shared_num))
     if st.button("自分も占う"):
-        st.query_params.clear() # URLを綺麗にしてリロード
+        st.query_params.clear()
         st.rerun()
 else:
-    # 普通に占う場合
     if st.button("運命の決断を下す"):
         num = random.randint(1, 100)
         display_result(num)
         
-        # 共有用URLの作成
-        # 例: https://your-app.streamlit.app/?num=42
         st.write("---")
-        st.write("🔗 この結果を友達にシェアする")
-        share_url = f"https://{st.get_option('server.address')}/?num={num}" # 本来は手動でURLを足すのが確実
-        st.code(f"今のURLの末尾にこれを足して送ってね： ?num={num}")
+        st.write("🔗 この【結果URL】をDiscordに貼って友達を煽ろう！")
+        
+        # 【ここを改善！】今のURLを自動で取得して、末尾に数字をくっつける
+        # GitHubのPagesやStreamlit CloudのURLを想定しています
+        base_url = "https://your-app-name.streamlit.app" # ← ここを自分のアプリのURLに書き換えてください
+        full_share_url = f"{base_url}/?num={num}"
+        
+        st.code(full_share_url) # これで完成したURLがコピー可能な状態で表示されます！
