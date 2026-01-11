@@ -31,7 +31,7 @@ useless_advices = [
     "昨日の次は、だいたい今日が来ます。",
     "右に曲がれない時は、左に3回曲がれば右に行けます。"
 ]
-insults = ["その決断でいいの？w", "人生、そんなに甘くないよw", "出直し確定ですw"]
+insults = ["それでいいの？w", "人生、そんなに甘くないよw", "出直し確定ですw"]
 
 query_params = st.query_params
 shared_num = query_params.get("num")
@@ -73,4 +73,5 @@ else:
         full_share_url = f"{base_url}/?num={num}"
         
         st.code(full_share_url)
+
 
