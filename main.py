@@ -48,7 +48,8 @@ else:
         
         # 【ここを改善！】今のURLを自動で取得して、末尾に数字をくっつける
         # GitHubのPagesやStreamlit CloudのURLを想定しています
-        base_url = "https://your-app-name.streamlit.app" # ← ここを自分のアプリのURLに書き換えてください
+        base_url = "https://my-omikuji-app-rrjeeuxyemsppmr3oveugp.streamlit.app/" # ← ここを自分のアプリのURLに書き換えてください
         full_share_url = f"{base_url}/?num={num}"
         
         st.code(full_share_url) # これで完成したURLがコピー可能な状態で表示されます！
+
