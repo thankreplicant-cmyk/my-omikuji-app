@@ -50,7 +50,7 @@ def display_result(num):
         st.markdown("## 📈 絶好調 📈")
     else:
         st.warning(f"出た数字: {num}")
-        st.markdown("## 😑 平凡な人生 😑")
+        st.markdown("## 😑 平凡な人生ﾍｲﾍｲ 😑")
     
     st.info(f"💡 助言：\n{advice}")
 
@@ -73,5 +73,6 @@ else:
         full_share_url = f"{base_url}/?num={num}"
         
         st.code(full_share_url)
+
 
 
