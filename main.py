@@ -3,6 +3,25 @@ import random
 
 st.title("🔥 人生！運試しおみくじ 🔥")
 
+# --- 【プロの小技】ボタンを金色にする魔法（CSS） ---
+st.markdown("""
+    <style>
+    div.stButton > button {
+        background-color: #FFD700; /* 金色 */
+        color: #000000;           /* 文字は黒で読みやすく */
+        border-radius: 10px;      /* 角を少し丸く */
+        border: 2px solid #DAA520; /* 縁取り */
+        font-weight: bold;        /* 太字 */
+        height: 3em;
+        width: 100%;              /* 横幅いっぱい */
+    }
+    div.stButton > button:hover {
+        background-color: #FFA500; /* カーソルを乗せたらオレンジっぽく光る */
+        color: #FFFFFF;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 useless_advices = [
     "靴下は右から履くと、右から履いたことになります。",
     "昨日の次は、だいたい今日が来ます。",
@@ -10,7 +29,6 @@ useless_advices = [
 ]
 insults = ["その決断でいいの？w", "人生、そんなに甘くないよw", "出直し確定ですw"]
 
-# URLからデータを読み取る
 query_params = st.query_params
 shared_num = query_params.get("num")
 
@@ -39,17 +57,15 @@ if shared_num:
         st.query_params.clear()
         st.rerun()
 else:
-    if st.button("運命の決断を下す"):
+    # 【変更】ボタンの文字を「おみくじを引く」に変更
+    if st.button("🧧 おみくじを引く"):
         num = random.randint(1, 100)
         display_result(num)
         
         st.write("---")
         st.write("🔗 この【結果URL】をDiscordに貼って友達を煽ろう！")
         
-        # 【ここを改善！】今のURLを自動で取得して、末尾に数字をくっつける
-        # GitHubのPagesやStreamlit CloudのURLを想定しています
-        base_url = "https://my-omikuji-app-rrjeeuxyemsppmr3oveugp.streamlit.app/" # ← ここを自分のアプリのURLに書き換えてください
+        base_url = "https://my-omikuji-app-rrjeeuxyemsppmr3oveugp.streamlit.app" 
         full_share_url = f"{base_url}/?num={num}"
         
-        st.code(full_share_url) # これで完成したURLがコピー可能な状態で表示されます！
-
+        st.code(full_share_url)
